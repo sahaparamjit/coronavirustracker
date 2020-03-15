@@ -20,11 +20,15 @@
 				<p class="lead">These many cases have been reported as of today.</p>
 				<hr>
 				<h4 class="display-4" th:text="${totalNewlyReported}"></h4>
-				<p class="lead">These many new cases have been reported today.</p>
+				<p class="lead">These many new cases have been reported till today.</p>
 			</div>
 		</div>
-
-		<table class="table table-striped">
+		<div class="md-form active-cyan-2 mb-3">
+			<input class="form-control" type="text" id="myInput"
+				onkeyup="myFunction()" placeholder="Search by City/Country.."
+				title="Type in a name">
+		</div>
+		<table id="myTable" class="table table-striped">
 			<thead>
 				<tr>
 					<th>Coutry</th>
@@ -43,5 +47,26 @@
 			</tbody>
 		</table>
 	</div>
+	<script>
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+
 </body>
 </html>
