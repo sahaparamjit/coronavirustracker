@@ -49,7 +49,6 @@ public class DataServices {
 			newState.setTodaysReported(todaysReported);
 			newState.setDifferenceFromLastDay(todaysReported - yesterdaysReported);
 			locations.add(newState);
-			locations.forEach(System.out::println);
 		}
 		allStates = locations;
 		return allStates;

@@ -20,18 +20,24 @@
 				<p class="lead">These many cases have been reported as of today.</p>
 				<hr>
 				<h4 class="display-4" th:text="${totalNewlyReported}"></h4>
-				<p class="lead">These many new cases have been reported till today.</p>
+				<p class="lead">These many new cases have been reported till
+					today.</p>
 			</div>
 		</div>
 		<div class="md-form active-cyan-2 mb-3">
-			<input class="form-control" type="text" id="myInput"
-				onkeyup="myFunction()" placeholder="Search by City/Country.."
-				title="Type in a name">
+			<form id="search">
+				<div class="form-group">
+					<input class="form-control" type="text" id="myInput"
+						onkeyup="myFunction()" placeholder="Search by City/Country.."
+						title="Type in a name">
+					 <button class="btn btn-primary" style="margin-top: 6px;" onclick="clear()">Reset</button> 
+				</div>
+			</form>
 		</div>
 		<table id="myTable" class="table table-striped">
 			<thead>
 				<tr>
-					<th>Coutry</th>
+					<th>Country</th>
 					<th>State</th>
 					<th>Currently Reported</th>
 					<th>Reported today</th>
@@ -48,17 +54,28 @@
 		</table>
 	</div>
 	<script>
+		function clear() {
+			$('search').get(0).reset();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				tr[i].style.display = "";
+			}
+		}
 		function myFunction() {
-			var input, filter, table, tr, td, i, txtValue;
+			var input = "", filter = "", table, tr, td, i, txtValue = "";
 			input = document.getElementById("myInput");
 			filter = input.value.toUpperCase();
 			table = document.getElementById("myTable");
 			tr = table.getElementsByTagName("tr");
 			for (i = 0; i < tr.length; i++) {
 				td = tr[i].getElementsByTagName("td")[0];
-				if (td) {
+				td2 = tr[i].getElementsByTagName("td")[1];
+				if (td || td2) {
 					txtValue = td.textContent || td.innerText;
-					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					txtVal2 = td2.textContent || td2.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1
+							|| txtVal2.toUpperCase().indexOf(filter) > -1) {
 						tr[i].style.display = "";
 					} else {
 						tr[i].style.display = "none";
