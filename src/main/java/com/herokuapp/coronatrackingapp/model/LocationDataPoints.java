@@ -1,4 +1,4 @@
-package com.synapse.metastore.model;
+package com.herokuapp.coronatrackingapp.model;
 
 public class LocationDataPoints {
 	private String country;

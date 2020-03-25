@@ -1,4 +1,4 @@
-package com.synapse.metastore.controllers;
+package com.herokuapp.coronatrackingapp.controllers;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.synapse.metastore.model.LocationDataPoints;
-import com.synapse.metastore.services.DataServices;
+import com.herokuapp.coronatrackingapp.model.LocationDataPoints;
+import com.herokuapp.coronatrackingapp.services.DataServices;
 
 @Controller
 public class WebController {

@@ -1,4 +1,4 @@
-package com.synapse.metastore;
+package com.herokuapp.coronatrackingapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
