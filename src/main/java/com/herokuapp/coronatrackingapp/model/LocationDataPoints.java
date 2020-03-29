@@ -5,6 +5,42 @@ public class LocationDataPoints {
 	private String state;
 	private int todaysReported;
 	private int differenceFromLastDay;
+	private int totalDeaths;
+	private int todaysDeathToll;
+	private int totalRecovered;
+	private int todayRecovered;
+
+	public int getTotalRecovered() {
+		return totalRecovered;
+	}
+
+	public void setTotalRecovered(int totalRecovered) {
+		this.totalRecovered = totalRecovered;
+	}
+
+	public int getTodayRecovered() {
+		return todayRecovered;
+	}
+
+	public void setTodayRecovered(int todayRecovered) {
+		this.todayRecovered = todayRecovered;
+	}
+
+	public int getTotalDeaths() {
+		return totalDeaths;
+	}
+
+	public void setTotalDeaths(int totalDeaths) {
+		this.totalDeaths = totalDeaths;
+	}
+
+	public int getTodaysDeathToll() {
+		return todaysDeathToll;
+	}
+
+	public void setTodaysDeathToll(int todaysDeathToll) {
+		this.todaysDeathToll = todaysDeathToll;
+	}
 
 	public String getCountry() {
 		return country;
@@ -41,7 +77,8 @@ public class LocationDataPoints {
 	@Override
 	public String toString() {
 		return "LocationDataPoints [country=" + country + ", state=" + state + ", todaysReported=" + todaysReported
-				+ ", differenceFromLastDay=" + differenceFromLastDay + "]";
+				+ ", differenceFromLastDay=" + differenceFromLastDay + ", totalDeaths=" + totalDeaths
+				+ ", todaysDeathToll=" + todaysDeathToll + ", totalRecovered=" + totalRecovered + ", todayRecovered="
+				+ todayRecovered + "]";
 	}
-
 }

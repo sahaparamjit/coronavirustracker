@@ -26,10 +26,15 @@ public class WebController {
 				.filter(x -> x.getCountry().trim() != "").collect(Collectors.toList());
 		model.addAttribute("locations", locations);
 		int totalReported = coronaServices.getAllStates().stream().mapToInt(x -> x.getTodaysReported()).sum();
+		int totalDeaths = coronaServices.getAllStates().stream().mapToInt(x -> x.getTotalDeaths()).sum();
+		int totalRecovered = coronaServices.getAllStates().stream().mapToInt(x -> x.getTotalRecovered()).sum();
 		int totalNewlyReported = coronaServices.getAllStates().stream().mapToInt(x -> x.getDifferenceFromLastDay())
 				.sum();
 		model.addAttribute("totalReported", totalReported);
+		model.addAttribute("percentageRecovery", 100*((float) totalRecovered/totalReported));
+		model.addAttribute("totalDeaths", totalDeaths);
 		model.addAttribute("totalNewlyReported", totalNewlyReported);
+		model.addAttribute("totalRecovered", totalRecovered);
 		return "home";
 	}
 

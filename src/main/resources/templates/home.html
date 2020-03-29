@@ -3,60 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <title>Coronavirus Tracking App</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
 </head>
 <body>
-	<div class="card-header"
-		style="position: fixed; width: 100%; background: #669999; padding-bottom: 2px;">Corona
-		Virus Tracking App</div>
-	<div align="right"
-		style="position: fixed; width: 76%; padding-top: 12px;">©Paramjit
-		Saha</div>
-	<div class="container-fluid">
 
-		<div id="table" class="jumbotron">
-			<div class="container">
-				<h1 class="display-4" th:text="${totalReported}"></h1>
-				<p class="lead">Cases reported as of today.</p>
-				<hr>
-				<h4 class="display-4" th:text="${totalNewlyReported}"></h4>
-				<p class="lead">New cases reported today.</p>
+	<div class="container-fluid">
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Coronavirus Dashboard</h1>
+		</div>
+		<div class="row">
+
+			<!-- Earnings (Monthly) Card Example -->
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-primary shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-primary text-uppercase mb-1">Confirmed
+									Case (Total)</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800"
+									th:text="${totalReported}">0</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-ambulance fa-2x text-gray-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Earnings (Monthly) Card Example -->
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-success shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Newly
+									Reported Case (Today)</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800"
+									th:text="${totalNewlyReported}">0</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-procedures fa-2x text-gray-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Earnings (Monthly) Card Example -->
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-info shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-info text-uppercase mb-1">Recovered</div>
+								<div class="row no-gutters align-items-center">
+									<div class="col-auto">
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+											th:text="${totalRecovered}">0</div>
+									</div>
+									<div class="col">
+										<div class="progress progress-sm mr-2">
+											<div class="progress-bar bg-info" role="progressbar"
+												th:style="'width:'+@{${percentageRecovery}}+'%;'"
+												aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-briefcase-medical fa-2x text-gray-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Pending Requests Card Example -->
+			<div class="col-xl-3 col-md-6 mb-4">
+				<div class="card border-left-warning shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div
+									class="text-xs font-weight-bold text-danger text-uppercase mb-1">Death
+									Cases (Total)</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800"
+									th:text="${totalDeaths}">0</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-skull-crossbones fa-2x text-gray-300"></i>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="md-form active-cyan-2 mb-3">
-			<form id="search">
-				<div class="form-group">
-					<input class="form-control" type="text" id="myInput"
-						onkeyup="myFunction()" placeholder="Search by City/Country.."
-						title="Type in a name">
-					<button class="btn btn-primary" style="margin-top: 6px;"
-						onclick="clear()">Reset</button>
+
+		<!-- DataTales Example -->
+		<div class="card shadow mb-4">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">SARS-Covid-2
+					Worldwide Effect</h6>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>Country</th>
+								<th>State</th>
+								<th>Total Confirmed Cases</th>
+								<th>Today's Confirmed Cases</th>
+								<th>Total Death Cases</th>
+								<th>Today's Death Cases</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="location : ${locations}">
+								<td th:text="${location.country}"></td>
+								<td th:text="${location.state}"></td>
+								<td th:text="${location.todaysReported}">0</td>
+								<td th:text="${location.differenceFromLastDay}">0</td>
+								<td th:text="${location.totalDeaths}">0</td>
+								<td th:text="${location.todaysDeathToll}">0</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			</form>
+			</div>
 		</div>
-		<table id="myTable" class="table table-striped">
-			<thead>
-				<tr>
-					<th>Country</th>
-					<th>State</th>
-					<th>Currently Reported</th>
-					<th>Reported today</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="location : ${locations}">
-					<td th:text="${location.country}"></td>
-					<td th:text="${location.state}"></td>
-					<td th:text="${location.todaysReported}">0</td>
-					<td th:text="${location.differenceFromLastDay}">0</td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
+
+	<!-- Footer -->
+	<footer class="sticky-footer bg-white">
+		<div class="container my-auto">
+			<div class="copyright text-center my-auto">
+				<span>Developed by Paramjit Saha (Covid-19 Outbreak)</span>
+			</div>
+		</div>
+	</footer>
+	<!-- End of Footer -->
+	<!-- Page level plugins -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="js/demo/datatables-demo.js"></script>
 	<script>
 		function clear() {
 			$('search').get(0).reset();
@@ -88,6 +217,5 @@
 			}
 		}
 	</script>
-
 </body>
 </html>
