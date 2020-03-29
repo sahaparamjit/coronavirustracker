@@ -14,10 +14,5 @@ public class CoronavirusappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CoronavirusappApplication.class, args);
 	}
-	
-	@Bean
-	public AnnotationConfigApplicationContext getContext() {
-		return new AnnotationConfigApplicationContext();
-	}
 
 }
